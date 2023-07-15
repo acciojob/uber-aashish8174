@@ -30,9 +30,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomer(Integer customerId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
-        if(!optionalCustomer.isPresent()){
-            throw new CustomerNotFountException("Customer doesn't Exist");
-        }
+//        if(!optionalCustomer.isPresent()){
+//            throw new CustomerNotFountException("Customer doesn't Exist");
+//        }
         Customer customer = optionalCustomer.get();
         customerRepository.delete(customer);
     }
@@ -41,9 +41,9 @@ public class CustomerServiceImpl implements CustomerService {
     public TripBooking bookTrip(int customerId, String fromLocation,
                                 String toLocation, int distanceInKm) throws Exception {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
-        if (!optionalCustomer.isPresent()){
-            throw new CustomerNotFountException("customer doesn't exist");
-        }
+//        if (!optionalCustomer.isPresent()){
+//            throw new CustomerNotFountException("customer doesn't exist");
+//        }
         Customer customer = optionalCustomer.get();
         TripBooking tripBooking = new TripBooking();
         tripBooking.setCustomer(customer);
@@ -57,9 +57,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void cancelTrip(Integer tripId) {
         Optional<TripBooking> optionalTripBooking = tripBookingRepository.findById(tripId);
-        if (!optionalTripBooking.isPresent()){
-            throw new TripNotFoundException("no such trip");
-        }
+//        if (!optionalTripBooking.isPresent()){
+//            throw new TripNotFoundException("no such trip");
+//        }
         TripBooking tripBooking = optionalTripBooking.get();
 
         tripBookingRepository.delete(tripBooking);
@@ -68,9 +68,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void completeTrip(Integer tripId) {
         Optional<TripBooking> optionalTripBooking = tripBookingRepository.findById(tripId);
-        if (!optionalTripBooking.isPresent()){
-            throw new TripNotFoundException("no such trip");
-        }
+//        if (!optionalTripBooking.isPresent()){
+//            throw new TripNotFoundException("no such trip");
+//        }
         TripBooking tripBooking = optionalTripBooking.get();
         tripBooking.setTripStatus(COMPLETED);
         tripBookingRepository.save(tripBooking);

@@ -32,9 +32,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Admin updatePassword(Integer adminId, String password) {
        Optional<Admin> optionalAdmin = adminRepository.findById(adminId);
-       if(!optionalAdmin.isPresent()){
-           throw new AdminNotFoundException("NO admin exist");
-       }
+//           if(!optionalAdmin.isPresent()){
+//               throw new AdminNotFoundException("NO admin exist");
+//           }
        Admin admin = optionalAdmin.get();
        admin.setPassWord(password);
        return adminRepository.save(admin);
@@ -44,9 +44,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void deleteAdmin(int adminId) {
         Optional<Admin> optionalAdmin = adminRepository.findById(adminId);
-        if(!optionalAdmin.isPresent()){
-            throw new AdminNotFoundException("NO admin exist");
-        }
+//        if(!optionalAdmin.isPresent()){
+//            throw new AdminNotFoundException("NO admin exist");
+//        }
         Admin admin = optionalAdmin.get();
         adminRepository.delete(admin);
     }
