@@ -45,7 +45,9 @@ public class CustomerServiceImpl implements CustomerService {
 //            throw new CustomerNotFountException("customer doesn't exist");
 //        }
         Customer customer = optionalCustomer.get();
+
         TripBooking tripBooking = new TripBooking();
+
         tripBooking.setCustomer(customer);
         tripBooking.setTripStatus(CONFIRMED);
         tripBooking.setFromLocation(fromLocation);

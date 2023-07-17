@@ -3,6 +3,7 @@ package com.driver.controllers;
 import com.driver.Exception.CustomerNotFountException;
 import com.driver.model.Customer;
 import com.driver.model.TripBooking;
+import com.driver.repository.TripBookingRepository;
 import com.driver.services.CustomerService;
 import com.driver.services.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class CustomerController {
 
 	@Autowired
 	CustomerServiceImpl customerService;
+
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerCustomer(@RequestBody Customer customer){
 		customerService.register(customer);
@@ -47,9 +49,11 @@ public class CustomerController {
 
 	@DeleteMapping("/complete")
 	public void completeTrip(@RequestParam Integer tripId){
+		customerService.completeTrip(tripId);
 	}
 
 	@DeleteMapping("/cancelTrip")
 	public void cancelTrip(@RequestParam Integer tripId){
+		customerService.cancelTrip(tripId);
 	}
 }
