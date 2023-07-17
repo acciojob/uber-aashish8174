@@ -25,13 +25,8 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/delete")
-	public void deleteCustomer(@RequestParam Integer customerId){
-		try {
-			customerService.deleteCustomer(customerId);
-		}
-		catch (CustomerNotFountException e){
-
-		}
+	public void deleteCustomer(@RequestParam Integer customerId) {
+		customerService.deleteCustomer(customerId);
 	}
 
 	@PostMapping("/bookTrip")
