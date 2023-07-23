@@ -31,8 +31,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin updatePassword(Integer adminId, String password) {
-       Optional<Admin> optionalAdmin = adminRepository.findById(adminId);
-       Admin admin = optionalAdmin.get();
+     Admin admin = adminRepository.findById(adminId).get();
+
        admin.setPassWord(password);
        Admin sd = adminRepository.save(admin);
        return sd;
@@ -47,13 +47,14 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Driver> getListOfDrivers() {
-        return null;
-        //return driverRepository.getListOfDriver();
+
+         List<Driver> ListOfDrivers = driverRepository.findAll();
+         return ListOfDrivers;
     }
 
     @Override
     public List<Customer> getListOfCustomers() {
-        return null;
-       // return customerRepository.ListOfCustomer();
+        List<Customer> ListOfCustomers = customerRepository.findAll();
+        return ListOfCustomers;
     }
 }

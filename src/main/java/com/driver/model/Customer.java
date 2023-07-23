@@ -18,7 +18,6 @@ class Customer{
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
     int customerId;
-    String name;
     String mobileNumber;
     String password;
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)

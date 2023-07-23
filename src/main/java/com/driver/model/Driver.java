@@ -18,7 +18,6 @@ public class Driver{
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
     int driverId;
-    String driverName;
     String mobileNumber;
     String password;
 
@@ -30,3 +29,5 @@ public class Driver{
     List<TripBooking> tripBookingListByDriver = new ArrayList<>();
 
 }
+
+

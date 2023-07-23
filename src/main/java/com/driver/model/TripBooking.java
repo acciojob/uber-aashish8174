@@ -9,6 +9,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity
+
 public class TripBooking{
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +18,8 @@ public class TripBooking{
 
     String fromLocation;
     String toLocation;
+
+    @Enumerated(EnumType.STRING)
     TripStatus tripStatus;
     int bill;
     int distanceInKm;
