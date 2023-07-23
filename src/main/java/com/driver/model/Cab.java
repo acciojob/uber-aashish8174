@@ -15,19 +15,19 @@ class Cab{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int cabId;
+    int Id;
     int perKmRate;
     Boolean available;
 
     @OneToOne(mappedBy = "cab",cascade = CascadeType.ALL)
     Driver driver;
 
-    public int getCabId() {
-        return cabId;
+    public int getId() {
+        return Id;
     }
 
-    public void setCabId(int cabId) {
-        this.cabId = cabId;
+    public void setId(int id) {
+        Id = id;
     }
 
     public int getPerKmRate() {
