@@ -48,7 +48,7 @@ public class CustomerServiceImpl implements CustomerService {
         TripBooking tripBooking = new TripBooking();
 
         tripBooking.setCustomer(customer);
-        tripBooking.setTripStatus(CONFIRMED);
+        tripBooking.setStatus(CONFIRMED);
         tripBooking.setFromLocation(fromLocation);
         tripBooking.setToLocation(toLocation);
         tripBooking.setDistanceInKm(distanceInKm);
@@ -73,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService {
 //            throw new TripNotFoundException("no such trip");
 //        }
         TripBooking tripBooking = optionalTripBooking.get();
-        tripBooking.setTripStatus(COMPLETED);
+        tripBooking.setStatus(COMPLETED);
         tripBookingRepository.save(tripBooking);
     }
 }

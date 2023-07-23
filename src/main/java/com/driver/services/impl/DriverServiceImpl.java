@@ -20,7 +20,7 @@ public class DriverServiceImpl implements DriverService {
 	@Override
 	public void register(String mobile, String password) {
 		Driver driver = new Driver();
-		driver.setMobileNumber(mobile);
+		driver.setMobile(mobile);
 		driver.setPassword(password);
 		driverRepository.save(driver);
 	}

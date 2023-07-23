@@ -16,8 +16,8 @@ public class Driver{
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
     int driverId;
-    String mobileNumber;
-    String password;
+    String Mobile;
+    String Password;
 
     @OneToOne
     @JoinColumn
@@ -34,20 +34,20 @@ public class Driver{
         this.driverId = driverId;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getMobile() {
+        return Mobile;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setMobile(String mobile) {
+        Mobile = mobile;
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        Password = password;
     }
 
     public Cab getCab() {

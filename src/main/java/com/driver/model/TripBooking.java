@@ -4,7 +4,8 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -13,13 +14,13 @@ import javax.persistence.*;
 public class TripBooking{
     @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int tripId;
+    int tripBookingId;
 
     String fromLocation;
     String toLocation;
 
     @Enumerated(EnumType.STRING)
-    TripStatus tripStatus;
+    TripStatus Status;
     int bill;
     int distanceInKm;
 
@@ -31,12 +32,12 @@ public class TripBooking{
     @JoinColumn
     Driver driver;
 
-    public int getTripId() {
-        return tripId;
+    public int getTripBookingId() {
+        return tripBookingId;
     }
 
-    public void setTripId(int tripId) {
-        this.tripId = tripId;
+    public void setTripId(int tripBookingId) {
+        this.tripBookingId = tripBookingId;
     }
 
     public String getFromLocation() {
@@ -55,12 +56,12 @@ public class TripBooking{
         this.toLocation = toLocation;
     }
 
-    public TripStatus getTripStatus() {
-        return tripStatus;
+    public TripStatus getStatus() {
+        return Status;
     }
 
-    public void setTripStatus(TripStatus tripStatus) {
-        this.tripStatus = tripStatus;
+    public void setStatus(TripStatus status) {
+        Status = status;
     }
 
     public int getBill() {

@@ -20,8 +20,8 @@ class Admin{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int adminId;
 
-    String userName;
-    String passWord;
+    String Username;
+    String Password;
 
     public int getAdminId() {
         return adminId;
@@ -31,19 +31,19 @@ class Admin{
         this.adminId = adminId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        Username = username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return Password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        Password = password;
     }
 }

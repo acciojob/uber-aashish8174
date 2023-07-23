@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
 	public Admin updatePassword(Integer adminId, String password) {
 		Admin admin = adminRepository.findById(adminId).get();
 
-		admin.setPassWord(password);
+		admin.setPassword(password);
 		Admin sd = adminRepository.save(admin);
 		return sd;
 	}
