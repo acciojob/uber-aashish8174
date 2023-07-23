@@ -59,23 +59,18 @@
 			<version>4.8.2</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.22</version>
-			<scope>provided</scope>
-		</dependency>
+
 
 		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>2.0.1.Final</version>
 		</dependency>
-        <dependency>
-            <groupId>string</groupId>
-            <artifactId>string</artifactId>
-            <version>0.1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>string</groupId>-->
+<!--            <artifactId>string</artifactId>-->
+<!--            <version>0.1.0</version>-->
+<!--        </dependency>-->
 		<dependency>
 			<groupId>int.esa.ccsds.mo</groupId>
 			<artifactId>ENCODING_STRING</artifactId>

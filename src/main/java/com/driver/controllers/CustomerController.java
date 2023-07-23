@@ -1,11 +1,8 @@
 package com.driver.controllers;
 
-import com.driver.Exception.CustomerNotFountException;
 import com.driver.model.Customer;
 import com.driver.model.TripBooking;
-import com.driver.repository.TripBookingRepository;
-import com.driver.services.CustomerService;
-import com.driver.services.CustomerServiceImpl;
+import com.driver.services.impl.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

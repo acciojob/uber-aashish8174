@@ -1,63 +1,79 @@
 package com.driver.services.impl;
 
-import com.driver.model.*;
-import com.driver.repository.AdminRepository;
-import com.driver.services.AdminService;
+import com.driver.model.Customer;
+import com.driver.model.TripBooking;
+import com.driver.repository.CustomerRepository;
+import com.driver.repository.TripBookingRepository;
 import com.driver.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.driver.repository.CustomerRepository;
-import com.driver.repository.DriverRepository;
-import com.driver.repository.TripBookingRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
+import static com.driver.model.TripStatus.COMPLETED;
+import static com.driver.model.TripStatus.CONFIRMED;
+
 @Service
-public class AdminServiceImpl implements AdminService {
-	@Autowired
-	AdminRepository adminRepository;
+public class CustomerServiceImpl implements CustomerService {
 
-	@Autowired
-	DriverRepository driverRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
-	@Autowired
-	CustomerRepository customerRepository;
+    @Autowired
+    TripBookingRepository tripBookingRepository;
+    @Override
+    public void register(Customer customer) {
+        customerRepository.save(customer);
+    }
 
-	@Override
-	public void adminRegister(Admin admin) {
-		adminRepository.save(admin);
-	}
+    @Override
+    public void deleteCustomer(Integer customerId) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+//        if(!optionalCustomer.isPresent()){
+//            throw new CustomerNotFountException("Customer doesn't Exist");
+//        }
+        Customer customer = optionalCustomer.get();
+        customerRepository.delete(customer);
+    }
 
-	@Override
-	public Admin updatePassword(Integer adminId, String password) {
-		Admin admin = adminRepository.findById(adminId).get();
+    @Override
+    public TripBooking bookTrip(int customerId, String fromLocation,
+                                String toLocation, int distanceInKm) throws Exception {
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+//        if (!optionalCustomer.isPresent()){
+//            throw new CustomerNotFountException("customer doesn't exist");
+//        }
+        Customer customer = optionalCustomer.get();
 
-		admin.setPassWord(password);
-		Admin sd = adminRepository.save(admin);
-		return sd;
-	}
+        TripBooking tripBooking = new TripBooking();
 
-	@Override
-	public void deleteAdmin(int adminId) {
-		Optional<Admin> optionalAdmin = adminRepository.findById(adminId);
-		Admin admin = optionalAdmin.get();
-		adminRepository.delete(admin);
-	}
+        tripBooking.setCustomer(customer);
+        tripBooking.setTripStatus(CONFIRMED);
+        tripBooking.setFromLocation(fromLocation);
+        tripBooking.setToLocation(toLocation);
+        tripBooking.setDistanceInKm(distanceInKm);
+        return tripBookingRepository.save(tripBooking);
+    }
 
-	@Override
-	public List<Driver> getListOfDrivers() {
+    @Override
+    public void cancelTrip(Integer tripId) {
+        Optional<TripBooking> optionalTripBooking = tripBookingRepository.findById(tripId);
+//        if (!optionalTripBooking.isPresent()){
+//            throw new TripNotFoundException("no such trip");
+//        }
+        TripBooking tripBooking = optionalTripBooking.get();
 
-		List<Driver> ListOfDrivers = driverRepository.findAll();
-		return ListOfDrivers;
-	}
+        tripBookingRepository.delete(tripBooking);
+    }
 
-	@Override
-	public List<Customer> getListOfCustomers() {
-		List<Customer> ListOfCustomers = customerRepository.findAll();
-		return ListOfCustomers;
-	}
+    @Override
+    public void completeTrip(Integer tripId) {
+        Optional<TripBooking> optionalTripBooking = tripBookingRepository.findById(tripId);
+//        if (!optionalTripBooking.isPresent()){
+//            throw new TripNotFoundException("no such trip");
+//        }
+        TripBooking tripBooking = optionalTripBooking.get();
+        tripBooking.setTripStatus(COMPLETED);
+        tripBookingRepository.save(tripBooking);
+    }
 }
-
