@@ -1,13 +1,16 @@
 package com.driver.services.impl;
 
 import com.driver.model.Customer;
+import com.driver.model.Driver;
 import com.driver.model.TripBooking;
 import com.driver.repository.CustomerRepository;
+import com.driver.repository.DriverRepository;
 import com.driver.repository.TripBookingRepository;
 import com.driver.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.driver.model.TripStatus.COMPLETED;
@@ -21,6 +24,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     TripBookingRepository tripBookingRepository;
+    @Autowired
+    DriverRepository driverRepository ;
     @Override
     public void register(Customer customer) {
         customerRepository.save(customer);
@@ -45,14 +50,36 @@ public class CustomerServiceImpl implements CustomerService {
 //        }
         Customer customer = optionalCustomer.get();
 
+        Driver driver = null;
+        List<Driver> allDriver = driverRepository.findAll();
+        for(Driver drv : allDriver) {
+            if(drv.getCab().getAvailable()) {
+                if (driver == null || driver.getDriverId() > drv.getDriverId()) {
+                    driver = drv;
+                }
+            }
+        }
+        if(driver == null){
+            throw new Exception("No cab available!");
+        }
+
         TripBooking tripBooking = new TripBooking();
+
 
         tripBooking.setCustomer(customer);
         tripBooking.setStatus(CONFIRMED);
         tripBooking.setFromLocation(fromLocation);
         tripBooking.setToLocation(toLocation);
         tripBooking.setDistanceInKm(distanceInKm);
-        return tripBookingRepository.save(tripBooking);
+        driver.getCab().setAvailable(false);
+
+        tripBooking.setBill(driver.getCab().getPerKmRate()*distanceInKm);
+        customer.getTripBookingList().add(tripBooking);
+        driver.getTripBookingListByDriver().add(tripBooking);
+        driverRepository.save(driver);
+        customerRepository.save(customer);
+        tripBookingRepository.save(tripBooking);
+        return tripBooking;
     }
 
     @Override
