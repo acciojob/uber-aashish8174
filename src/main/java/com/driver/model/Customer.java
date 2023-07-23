@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -23,4 +21,35 @@ class Customer{
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     List<TripBooking> tripBookingList = new ArrayList<>();
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<TripBooking> getTripBookingList() {
+        return tripBookingList;
+    }
+
+    public void setTripBookingList(List<TripBooking> tripBookingList) {
+        this.tripBookingList = tripBookingList;
+    }
 }
