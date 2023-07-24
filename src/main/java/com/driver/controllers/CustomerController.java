@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
 
 	@Autowired
-	CustomerServiceImpl customerService;
+	CustomerServiceImpl customerService = new CustomerServiceImpl();
 
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerCustomer(@RequestBody Customer customer){
@@ -30,13 +30,13 @@ public class CustomerController {
 	public ResponseEntity<Integer> bookTrip(@RequestParam Integer customerId,
 											@RequestParam String fromLocation, @RequestParam String toLocation,
 											@RequestParam Integer distanceInKm) throws Exception {
-		try {
+//		try {
 			TripBooking bookedTrip = customerService.bookTrip(customerId, fromLocation, toLocation, distanceInKm);
-			return new ResponseEntity<>(bookedTrip.getTripBookingId(), HttpStatus.CREATED);
-		}
-		catch (Exception e){
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+     		return new ResponseEntity<>(bookedTrip.getTripBookingId(), HttpStatus.CREATED);
+//		}
+//		catch (Exception e){
+//			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//		}
 	}
 
 	@DeleteMapping("/complete")

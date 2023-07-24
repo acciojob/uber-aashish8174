@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.driver.model.TripStatus.COMPLETED;
-import static com.driver.model.TripStatus.CONFIRMED;
+import static com.driver.model.TripStatus.*;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -89,8 +88,13 @@ public class CustomerServiceImpl implements CustomerService {
 //            throw new TripNotFoundException("no such trip");
 //        }
         TripBooking tripBooking = optionalTripBooking.get();
+        tripBooking.setStatus(CANCELED);
+        tripBooking.setBill(0);
+        Driver driver = tripBooking.getDriver();
+        driver.getCab().setAvailable(true);
 
-        tripBookingRepository.delete(tripBooking);
+        driverRepository.save(driver);
+        tripBookingRepository.save(tripBooking);
     }
 
     @Override
@@ -101,6 +105,9 @@ public class CustomerServiceImpl implements CustomerService {
 //        }
         TripBooking tripBooking = optionalTripBooking.get();
         tripBooking.setStatus(COMPLETED);
+        Driver driver = tripBooking.getDriver();
+        driver.getCab().setAvailable(true);
+        driverRepository.save(driver);
         tripBookingRepository.save(tripBooking);
     }
 }
