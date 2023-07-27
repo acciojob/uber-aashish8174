@@ -14,10 +14,10 @@ import java.util.Optional;
 @Service
 public class DriverServiceImpl implements DriverService {
 	@Autowired
-	DriverRepository driverRepository;
+	DriverRepository driverRepository3;
 
 	@Autowired
-	CabRepository cabRepository;
+	CabRepository cabRepository3;
 
 	@Override
 	public void register(String mobile, String password){
@@ -30,22 +30,22 @@ public class DriverServiceImpl implements DriverService {
 		cab.setAvailable(true);
 		cab.setDriver(driver);
 		driver.setCab(cab);
-		driverRepository.save(driver);
+		driverRepository3.save(driver);
 	}
 
 	@Override
 	public void removeDriver(int driverId){
 		// Delete driver without using deleteById function
-		Driver drvr = driverRepository.findById(driverId).get();
-		driverRepository.delete(drvr);
+		Driver drvr = driverRepository3.findById(driverId).get();
+		driverRepository3.delete(drvr);
 	}
 
 	@Override
 	public void updateStatus(int driverId){
 		//Set the status of respective car to unavailable
-		Driver driver = driverRepository.findById(driverId).get();
+		Driver driver = driverRepository3.findById(driverId).get();
 		Cab cab =driver.getCab();
 		cab.setAvailable(false);
-		cabRepository.save(cab);
+		cabRepository3.save(cab);
 	}
 }
