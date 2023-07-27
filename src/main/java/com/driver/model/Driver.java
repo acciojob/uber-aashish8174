@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table
 public class Driver{
 
     @Id
@@ -19,8 +20,7 @@ public class Driver{
     String Mobile;
     String Password;
 
-    @OneToOne
-    @JoinColumn
+    @OneToOne(mappedBy = "driver",cascade = CascadeType.ALL)
     Cab cab;
 
     @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)

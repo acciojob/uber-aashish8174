@@ -1,15 +1,16 @@
 package com.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
 @Entity
-
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Table
 public
 class Cab{
 
@@ -19,7 +20,9 @@ class Cab{
     int perKmRate;
     Boolean available;
 
-    @OneToOne(mappedBy = "cab",cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn
     Driver driver;
 
     public int getId() {

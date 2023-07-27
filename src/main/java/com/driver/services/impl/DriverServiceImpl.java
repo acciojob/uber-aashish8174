@@ -14,9 +14,9 @@ import java.util.Optional;
 @Service
 public class DriverServiceImpl implements DriverService {
 	@Autowired
-	DriverRepository driverRepository;
+	DriverRepository driverRepository2;
 	@Autowired
-	CabRepository cabRepository;
+	CabRepository cabRepository2;
 	@Override
 	public void register(String mobile, String password) {
 		Driver driver = new Driver();
@@ -24,25 +24,26 @@ public class DriverServiceImpl implements DriverService {
 		driver.setPassword(password);
 		Cab cab = new Cab();
 		cab.setPerKmRate(10);
-		cab.setDriver(driver);
 		cab.setAvailable(true);
+		cab.setDriver(driver);
+		driver.setCab(cab);
+		driverRepository2.save(driver);
 
-		driverRepository.save(driver);
 	}
 
 	@Override
 	public void removeDriver(int driverId) {
-		Optional<Driver> driverOptional = driverRepository.findById(driverId);
+		Optional<Driver> driverOptional = driverRepository2.findById(driverId);
 		Driver driver = driverOptional.get();
-		driverRepository.delete(driver);
+		driverRepository2.delete(driver);
 	}
 
 	@Override
 	public void updateStatus(int driverId) {
-		Optional<Driver> driverOptional = driverRepository.findById(driverId);
+		Optional<Driver> driverOptional = driverRepository2.findById(driverId);
 		Driver driver = driverOptional.get();
 		Cab cab = driver.getCab();
 		cab.setAvailable(false);
-		cabRepository.save(cab);
+		cabRepository2.save(cab);
 	}
 }
