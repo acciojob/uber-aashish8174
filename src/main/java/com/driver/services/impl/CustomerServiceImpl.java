@@ -19,7 +19,7 @@ import static com.driver.model.TripStatus.*;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    CustomerRepository customerRepository;
+    CustomerRepository customerRepository1;
 
     @Autowired
     TripBookingRepository tripBookingRepository;
@@ -27,23 +27,23 @@ public class CustomerServiceImpl implements CustomerService {
     DriverRepository driverRepository ;
     @Override
     public void register(Customer customer) {
-        customerRepository.save(customer);
+        customerRepository1.save(customer);
     }
 
     @Override
     public void deleteCustomer(Integer customerId) {
-        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        Optional<Customer> optionalCustomer = customerRepository1.findById(customerId);
 //        if(!optionalCustomer.isPresent()){
 //            throw new CustomerNotFountException("Customer doesn't Exist");
 //        }
         Customer customer = optionalCustomer.get();
-        customerRepository.delete(customer);
+        customerRepository1.delete(customer);
     }
 
     @Override
     public TripBooking bookTrip(int customerId, String fromLocation,
                                 String toLocation, int distanceInKm) throws Exception {
-        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+        Optional<Customer> optionalCustomer = customerRepository1.findById(customerId);
 //        if (!optionalCustomer.isPresent()){
 //            throw new CustomerNotFountException("customer doesn't exist");
 //        }
@@ -59,7 +59,8 @@ public class CustomerServiceImpl implements CustomerService {
             }
         }
         if(driver == null){
-            throw new Exception("No cab available!");
+            return null;
+//            throw new Exception("No cab available!");
         }
 
         TripBooking tripBooking = new TripBooking();
@@ -76,7 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer.getTripBookingList().add(tripBooking);
         driver.getTripBookingListByDriver().add(tripBooking);
         driverRepository.save(driver);
-        customerRepository.save(customer);
+        customerRepository1.save(customer);
         tripBookingRepository.save(tripBooking);
         return tripBooking;
     }
